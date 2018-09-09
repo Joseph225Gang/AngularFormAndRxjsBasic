@@ -1,0 +1,28 @@
+<div>
+  <form [formGroup]="form">
+    <div *ngFor="let item of form.controls; let i = index" [formGroupName]="i">
+      <div class="form-group">
+          <label>帳號</label>
+          <input type="text" formControlName="acc" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>電話</label>
+        <input type="text" formControlName="tel" class="form-control">
+    </div>
+    <div *ngIf="item.controls.tel.errors && item.controls.tel.touched" style="color:red">
+        <div *ngIf="item.controls.tel.errors.required">
+            必填未填
+        </div>
+        <div *ngIf="item.controls.tel.errors.minlength">
+          長度不能小於7
+      </div>
+      <div *ngIf="item.controls.tel.errors.pattern">
+        請輸入數字
+    </div>
+    </div>
+      <button type="button" [disabled]="item.invalid" class="btn btn-success">送出</button>
+      <button type="button" (click)="see()" class="btn btn-success">查看</button>
+    </div>
+  </form>
+</div>
+
